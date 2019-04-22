@@ -1,0 +1,39 @@
+{
+  "name": "langquiz-site",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "server/index.js",
+  "scripts": {
+    "clean": "rimraf build",
+    "build": "parcel build client/index.jsx -d build -o bundle.js",
+    "dev": "npm-run-all --parallel dev:*",
+    "dev:client": "parcel watch client/index.jsx -d build -o bundle.js",
+    "dev:server": "nodemon --watch server server/index.js",
+    "start": "node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-async-handler": "^1.1.4",
+    "mongodb": "^3.2.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.11",
+    "npm-run-all": "^4.1.5",
+    "parcel-bundler": "^1.12.3",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "rimraf": "^2.6.3"
+  },
+  "browserslist": [
+    ">= 1% in US",
+    "not ie <= 11",
+    "not ios < 10"
+  ],
+  "engines": {
+    "node": "^10.15.1"
+  }
+}
