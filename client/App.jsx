@@ -36,6 +36,9 @@ export default function App() {
         console.log('/api/getLanguages')
         fetch('/api/getLanguages')
             .then(res => res.json())
+            .then(langs => langs.sort((a, b) =>
+                a.name.localeCompare(b.name)
+            ))
             .then(setLanguages)
             .catch(console.error)
     })
