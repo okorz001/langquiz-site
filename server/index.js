@@ -10,6 +10,11 @@ const app = express()
 app.use('/api', createApiRouter())
 app.use(express.static('assets'))
 app.use(express.static('build'))
+app.get('*', (req, res) => {
+    // assume client route, serve client
+    req.url = '/index.html'
+    app.handle(req, res)
+})
 
 app.listen(PORT, err => {
     if (err) {
