@@ -22,7 +22,6 @@ async function getLanguages(req, res, next) {
         .toArray()
     res.json(langs)
     console.log(`found ${langs.length} langs`)
-    next()
 }
 
 async function getSkills(req, res, next) {
@@ -34,7 +33,6 @@ async function getSkills(req, res, next) {
         .toArray()
     res.json(skills)
     console.log(`found ${skills.length} skills for ${from}/${to}`)
-    next()
 }
 
 async function getWords(req, res, next) {
@@ -46,7 +44,6 @@ async function getWords(req, res, next) {
         .toArray()
     res.json(words)
     console.log(`found ${words.length} words for ${from}/${to}`)
-    next()
 }
 
 module.exports = createApiRouter
