@@ -28,21 +28,7 @@ function getLanguageName(languages, id) {
     return language ? language.name : id
 }
 
-export default function App() {
-    const [languages, setLanguages] = useState([])
-
-    useEffect(() => {
-        if (languages.length) return
-        console.log('/api/getLanguages')
-        fetch('/api/getLanguages')
-            .then(res => res.json())
-            .then(langs => langs.sort((a, b) =>
-                a.name.localeCompare(b.name)
-            ))
-            .then(setLanguages)
-            .catch(console.error)
-    })
-
+export default function App({languages}) {
     return (
         <Router>
             <div>

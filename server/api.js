@@ -1,49 +1,33 @@
 'use strict'
 
-const asyncHandler = require('express-async-handler')
 const express = require('express')
-
-const mongoMiddleware = require('./mongo')
 
 function createApiRouter() {
     const router = express.Router()
-    router.use(asyncHandler(mongoMiddleware))
-    router.get('/getLanguages', asyncHandler(getLanguages))
-    router.get('/getSkills/:from/:to', asyncHandler(getSkills))
-    router.get('/getWords/:from/:to', asyncHandler(getWords))
+    router.get('/getLanguages', getLanguages)
+    router.get('/getSkills/:from/:to', getSkills)
+    router.get('/getWords/:from/:to', getWords)
     return router
 }
 
-async function getLanguages(req, res, next) {
-    const langs = await req.mongo
-        .db('langquiz')
-        .collection('languages')
-        .find({})
-        .toArray()
-    res.json(langs)
-    console.log(`found ${langs.length} langs`)
+function getLanguages(req, res, next) {
+    req.dao.getLanguages()
+        .then(it => res.json(it))
+        .catch(next)
 }
 
-async function getSkills(req, res, next) {
+function getSkills(req, res, next) {
     const {from, to} = req.params
-    const skills = await req.mongo
-        .db('langquiz')
-        .collection('skills')
-        .find({from, to})
-        .toArray()
-    res.json(skills)
-    console.log(`found ${skills.length} skills for ${from}/${to}`)
+    req.dao.getSkills(from, to)
+        .then(it => res.json(it))
+        .catch(next)
 }
 
-async function getWords(req, res, next) {
+function getWords(req, res, next) {
     const {from, to} = req.params
-    const words = await req.mongo
-        .db('langquiz')
-        .collection('words2')
-        .find({from, to})
-        .toArray()
-    res.json(words)
-    console.log(`found ${words.length} words for ${from}/${to}`)
+    req.dao.getWords(from, to)
+        .then(it => res.json(it))
+        .catch(next)
 }
 
 module.exports = createApiRouter

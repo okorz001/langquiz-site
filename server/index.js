@@ -1,19 +1,34 @@
 'use strict'
 
 const express = require('express')
+const hbs = require('hbs')
 
 const createApiRouter = require('./api')
+const withDao = require('./dao')
 
 const PORT = process.env.PORT || 8080
 
+// expose JSON.stringify to handlebars to safely inject JSON for script tags
+hbs.registerHelper('json', JSON.stringify)
+
 const app = express()
-app.use('/api', createApiRouter())
+
+// never shadow api
+app.use('/api', withDao, createApiRouter())
+
+// search for assets
 app.use(express.static('assets'))
 app.use(express.static('build'))
-app.get('*', (req, res) => {
-    // assume client route, serve client
-    req.url = '/index.html'
-    app.handle(req, res)
+
+// assume client route, serve client
+app.get('*', withDao, (req, res, next) => {
+    // bootstrap app
+    req.dao.getLanguages()
+        .then(languages => {
+            const data = {languages}
+            res.render('index.hbs', {LangQuiz: data})
+        })
+        .catch(next)
 })
 
 app.listen(PORT, err => {

@@ -11,12 +11,11 @@ const readFile = promisify(fs.readFile)
 // MongoClient has a connection pool
 let mongo = null
 
-async function mongoMiddleware(req, res, next) {
+async function getMongo() {
     if (!mongo) {
         mongo = await createMongo()
     }
-    req.mongo = mongo
-    next()
+    return mongo
 }
 
 async function createMongo() {
@@ -43,4 +42,4 @@ async function getMongoCreds() {
     }
 }
 
-module.exports = mongoMiddleware
+module.exports = getMongo
