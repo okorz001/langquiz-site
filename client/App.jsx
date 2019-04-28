@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import {connect} from 'react-redux'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
 function LanguageSelectPage({languages}) {
@@ -17,11 +18,23 @@ function LanguageSelectPage({languages}) {
     )
 }
 
+const LanguageSelectPage2 = connect(
+    state => ({languages: state.languages})
+)(LanguageSelectPage)
+
 function HomePage({learning, from, languages}) {
     const learningName = getLanguageName(languages, learning)
     const fromName = getLanguageName(languages, from)
     return <div>You're learning {learningName} from {fromName}</div>
 }
+
+const HomePage2 = connect(
+    (state, ownProps) => ({
+        learning: ownProps.match.params.learning,
+        from: ownProps.match.params.from,
+        languages: state.languages,
+    })
+)(HomePage)
 
 function getLanguageName(languages, id) {
     const language = languages.find(it => it.id == id)
@@ -29,18 +42,17 @@ function getLanguageName(languages, id) {
 }
 
 export default function App({languages}) {
+    // Only route valid languages
+    const langRegex = languages
+        .map(it => it.id)
+        .join('|')
+    const homePath = `/:learning(${langRegex})/:from(${langRegex})`
+
     return (
         <Router>
             <div>
-                <Route path="/"
-                       exact
-                       render={() => <LanguageSelectPage languages={languages} />} />
-                <Route path="/:learning/:from"
-                       render={({match}) =>
-                           <HomePage learning={match.params.learning}
-                                     from={match.params.from}
-                                     languages={languages} />
-                       } />
+                <Route path="/" exact component={LanguageSelectPage2} />
+                <Route path={homePath} component={HomePage2} />
             </div>
         </Router>
     )
