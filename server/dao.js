@@ -2,8 +2,10 @@
 
 const getMongo = require('./mongo')
 
+const DATABASE = 'langquiz'
+
 function withDao(req, res, next) {
-    getMongo()
+    getMongo(DATABASE)
        .then(mongo => {
            req.dao = new Dao(mongo)
            next()
@@ -18,7 +20,7 @@ class Dao {
 
     async getLanguages() {
         const langs = await this.mongo
-            .db('langquiz')
+            .db(DATABASE)
             .collection('languages')
             .find({})
             .toArray()
@@ -28,7 +30,7 @@ class Dao {
 
     async getSkills(from, to) {
         const skills = await this.mongo
-            .db('langquiz')
+            .db(DATABASE)
             .collection('skills')
             .find({from, to})
             .toArray()
@@ -38,7 +40,7 @@ class Dao {
 
     async getWords(from, to) {
         const words = await this.mongo
-            .db('langquiz')
+            .db(DATABASE)
             .collection('words2')
             .find({from, to})
             .toArray()

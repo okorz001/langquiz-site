@@ -11,7 +11,19 @@ const readFile = promisify(fs.readFile)
 // MongoClient has a connection pool
 let mongo = null
 
-async function getMongo() {
+async function getMongo(pingDb) {
+    if (mongo && pingDb) {
+        try {
+            await mongo
+                .db(pingDb)
+                .admin()
+                .command({ping : 1}, {maxTimeMS: 1000})
+        }
+        catch (err) {
+            console.error(err)
+            mongo = null
+        }
+    }
     if (!mongo) {
         mongo = await createMongo()
     }
