@@ -1,14 +1,20 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import {Link} from 'react-router5'
 
 function LanguageSelectPage({languages}) {
     const choices = languages
         // TODO: hardcoding en, can't learn en from en
         .filter(it => it.id != 'en')
         .map(it => {
-            const path = `/${it.id}/en`
-            return <li key={it.id}><Link to={path}>{it.name}</Link></li>
+            const linkProps = {
+                routeName: 'home',
+                routeParams: {
+                    learning: it.id,
+                    from: 'en',
+                },
+            }
+            return <li key={it.id}><Link {...linkProps}>{it.name}</Link></li>
         })
     return (
         <div>
@@ -29,9 +35,9 @@ function HomePage({learning, from, languages}) {
 }
 
 const HomePage2 = connect(
-    (state, ownProps) => ({
-        learning: ownProps.match.params.learning,
-        from: ownProps.match.params.from,
+    state => ({
+        learning: state.router.route.params.learning,
+        from: state.router.route.params.from,
         languages: state.languages,
     })
 )(HomePage)
@@ -41,19 +47,25 @@ function getLanguageName(languages, id) {
     return language ? language.name : id
 }
 
-export default function App({languages}) {
+function App({route, languages}) {
     // Only route valid languages
     const langRegex = languages
         .map(it => it.id)
         .join('|')
     const homePath = `/:learning(${langRegex})/:from(${langRegex})`
 
-    return (
-        <Router>
-            <div>
-                <Route path="/" exact component={LanguageSelectPage2} />
-                <Route path={homePath} component={HomePage2} />
-            </div>
-        </Router>
-    )
+    console.log(route)
+    if (route.name == "select") {
+        return <LanguageSelectPage2 />
+    }
+    else if (route.name == "home") {
+        return <HomePage2 />
+    }
 }
+
+export default connect(
+    state => ({
+        route: state.router.route,
+        languages: state.languages,
+    })
+)(App)
