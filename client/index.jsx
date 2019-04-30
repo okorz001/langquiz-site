@@ -3,7 +3,7 @@ import {render} from 'react-dom'
 import {Provider} from 'react-redux'
 import {RouterProvider} from 'react-router5'
 
-import App from './App'
+import App from './components/App'
 import newRouter from './router'
 import newStore from './store'
 
