@@ -5,7 +5,10 @@ import LanguageSelectPage from './LanguageSelectPage'
 import HomePage from './HomePage'
 
 export function App({route, languages}) {
-    if (route.name == "select") {
+    if (!route) {
+        return <div>Loading...</div>
+    }
+    else if (route.name == "select") {
         return <LanguageSelectPage />
     }
     else if (route.name == "home") {
