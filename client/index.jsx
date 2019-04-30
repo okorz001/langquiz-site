@@ -1,23 +1,18 @@
 import React from 'react'
 import {render} from 'react-dom'
-import {Provider} from 'react-redux'
-import {RouterProvider} from 'react-router5'
 
 import App from './components/App'
+import Container, {instrument} from './components/Container'
 import newRouter from './router'
 import newStore from './store'
 
 const router = newRouter()
-const store = newStore(router, window.LangQuiz)
+const store = newStore(router, instrument, window.LangQuiz)
 
-const app = (
-    <Provider store={store}>
-        <RouterProvider router={router}>
-            <App />
-        </RouterProvider>
-    </Provider>
-)
-
-router.start(() => {
+function mount() {
+    const props = {router, store}
+    const app = <Container {...props}><App /></Container>
     render(app, document.getElementById('app'))
-})
+}
+
+router.start(mount)

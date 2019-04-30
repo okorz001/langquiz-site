@@ -1,10 +1,10 @@
-import {applyMiddleware, createStore} from 'redux'
+import {applyMiddleware, createStore, compose} from 'redux'
 import {createLogger} from 'redux-logger'
 import {router5Middleware} from 'redux-router5'
 
 import reducer from './reducers'
 
-export default function newStore(router, initialState) {
+export default function newStore(router, instrument, initialState) {
     const mw = []
     mw.push(router5Middleware(router))
 
@@ -12,5 +12,6 @@ export default function newStore(router, initialState) {
     const logger = createLogger()
     mw.push(logger)
 
-    return createStore(reducer, initialState, applyMiddleware(...mw))
+    const enhancer = compose(applyMiddleware(...mw), instrument())
+    return createStore(reducer, initialState, enhancer)
 }
