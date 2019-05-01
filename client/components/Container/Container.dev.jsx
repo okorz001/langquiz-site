@@ -3,7 +3,11 @@ import {Provider} from 'react-redux'
 import {RouterProvider} from 'react-router5'
 import {createDevTools} from 'redux-devtools'
 import DockMonitor from 'redux-devtools-dock-monitor'
-import LogMonitor from 'redux-devtools-log-monitor'
+import Inspector from 'redux-devtools-inspector'
+import SliderMonitor from 'redux-slider-monitor'
+
+// see https://github.com/gaearon/base16-js/tree/master/src
+const THEME = 'tomorrow'
 
 // h for hide
 const HIDE_KEY = 'alt-h'
@@ -16,7 +20,8 @@ const DevTools = createDevTools(
     <DockMonitor toggleVisibilityKey={HIDE_KEY}
                  changePositionKey={POSITION_KEY}
                  changeMonitorKey={MONITOR_KEY} >
-        <LogMonitor />
+        <Inspector theme={THEME} invertTheme={false} />
+        <SliderMonitor theme={THEME} />
     </DockMonitor>
 )
 
