@@ -35,3 +35,29 @@ export const getCoursesDisplay = createSelector(
 export function getCurrentCourse(state) {
     return state.currentCourse
 }
+
+export function getSkills(state) {
+    return state.skills
+}
+
+export const getCurrentCourseSkills = createSelector(
+    getSkills,
+    getCurrentCourse,
+    (skills, {learning, from}) =>  {
+        const key = `${learning},${from}`
+        return skills[key]
+    }
+)
+
+export function getWords(state) {
+    return state.words
+}
+
+export const getCurrentCourseWords = createSelector(
+    getWords,
+    getCurrentCourse,
+    (words, {learning, from}) =>  {
+        const key = `${learning},${from}`
+        return words[key]
+    }
+)
