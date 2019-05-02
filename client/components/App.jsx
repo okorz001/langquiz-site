@@ -1,24 +1,32 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import LanguageSelectPage from './LanguageSelectPage'
-import HomePage from './HomePage'
+import LandingPage from './LandingPage'
+import SelectPage from './SelectPage'
+import StudyPage from './StudyPage'
+import {getLanguages, getRoute} from '../selectors'
 
 export function App({route, languages}) {
     if (!route) {
         return <div>Loading...</div>
     }
-    else if (route.name == "select") {
-        return <LanguageSelectPage />
+    else if (route.name == 'landing') {
+        return <LandingPage />
     }
-    else if (route.name == "home") {
-        return <HomePage />
+    else if (route.name == 'select') {
+        return <SelectPage />
+    }
+    else if (route.name == 'study') {
+        return <StudyPage />
+    }
+    else {
+        return <div>404</div>
     }
 }
 
 export default connect(
     state => ({
-        route: state.router.route,
-        languages: state.languages,
+        route: getRoute(state),
+        languages: getLanguages(state),
     })
 )(App)

@@ -4,6 +4,7 @@ const express = require('express')
 const hbs = require('hbs')
 
 const createApiRouter = require('./api')
+const serveApp = require('./app')
 const withDao = require('./dao')
 
 const PORT = process.env.PORT || 8080
@@ -21,15 +22,7 @@ app.use(express.static('assets'))
 app.use(express.static('build'))
 
 // assume client route, serve client
-app.get('*', withDao, (req, res, next) => {
-    // bootstrap app
-    req.dao.getLanguages()
-        .then(languages => {
-            const data = {languages}
-            res.render('index.hbs', {LangQuiz: data})
-        })
-        .catch(next)
-})
+app.get('*', withDao, serveApp)
 
 app.listen(PORT, err => {
     if (err) {

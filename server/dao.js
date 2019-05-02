@@ -28,6 +28,25 @@ class Dao {
         return langs
     }
 
+    async getCourses(from) {
+        let query = {}
+        if (from) {
+            query.from = from
+        }
+        const courses = await this.mongo
+            .db(DATABASE)
+            .collection('courses')
+            .find(query)
+            .toArray()
+        if (from) {
+            console.log(`found ${courses.length} courses for ${from}`)
+        }
+        else {
+            console.log(`found ${courses.length} courses`)
+        }
+        return courses
+    }
+
     async getSkills(from, to) {
         const skills = await this.mongo
             .db(DATABASE)
