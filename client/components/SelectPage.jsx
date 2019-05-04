@@ -8,7 +8,7 @@ export function SelectPage({courses}) {
     const choices = courses
         .map(it => {
             const linkProps = {
-                routeName: 'study',
+                routeName: 'study.quiz',
                 routeParams: {
                     learning: it.learning,
                     from: it.from,

@@ -4,7 +4,12 @@ import browserPlugin from 'router5-plugin-browser'
 const ROUTES = [
     {name: 'landing', path: '/'},
     {name: 'select', path: '/select'},
-    {name: 'study', path: '/study/:learning/:from'},
+    {name: 'study', path: '/study/:learning/:from', children: [
+            {name: 'quiz', path: '/quiz'},
+            {name: 'history', path: '/history'},
+            {name: 'words', path: '/words'},
+        ],
+    },
 ]
 
 export default function newRouter() {

@@ -45,7 +45,7 @@ export const getCurrentCourseSkills = createSelector(
     getCurrentCourse,
     (skills, {learning, from}) =>  {
         const key = `${learning},${from}`
-        return skills[key]
+        return skills[key] || []
     }
 )
 
@@ -58,6 +58,6 @@ export const getCurrentCourseWords = createSelector(
     getCurrentCourse,
     (words, {learning, from}) =>  {
         const key = `${learning},${from}`
-        return words[key]
+        return words[key] || []
     }
 )
