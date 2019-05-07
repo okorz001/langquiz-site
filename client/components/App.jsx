@@ -1,14 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
+import Header from './Header'
 import HistoryPage from './HistoryPage'
 import LandingPage from './LandingPage'
 import QuizPage from './QuizPage'
 import SelectPage from './SelectPage'
 import WordsPage from './WordsPage'
-import {getLanguages, getRoute} from '../selectors'
+import {getRoute} from '../selectors'
 
-export function App({route, languages}) {
+function getPage(route) {
     if (!route) {
         return <div>Loading...</div>
     }
@@ -29,13 +30,23 @@ export function App({route, languages}) {
         return <WordsPage />
     }
     else {
-        return <div>404</div>
+        console.log(`Unknown route: ${route.path}`)
+        return <div>404 Not Found</div>
     }
+}
+
+export function App({route}) {
+    console.log(route)
+    return (
+        <div>
+            <Header />
+            <main>{getPage(route)}</main>
+        </div>
+    )
 }
 
 export default connect(
     state => ({
         route: getRoute(state),
-        languages: getLanguages(state),
     })
 )(App)
