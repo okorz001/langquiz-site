@@ -7,10 +7,10 @@ import {getCurrentCourse} from '../selectors'
 export function LandingPage({currentCourse, navigateTo}) {
     const {learning, from} = currentCourse
     if (learning && from) {
-        navigateTo('study', {learning, from})
+        navigateTo('study.quiz', {learning, from}, {replace: true})
     }
     else {
-        navigateTo('select')
+        navigateTo('select', {}, {replace: true})
     }
     return <div>Loading...</div>
 }
