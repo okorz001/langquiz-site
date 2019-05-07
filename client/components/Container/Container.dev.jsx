@@ -19,7 +19,9 @@ const POSITION_KEY = 'alt-m'
 const DevTools = createDevTools(
     <DockMonitor toggleVisibilityKey={HIDE_KEY}
                  changePositionKey={POSITION_KEY}
-                 changeMonitorKey={MONITOR_KEY} >
+                 changeMonitorKey={MONITOR_KEY}
+                 defaultPosition="bottom"
+                 defaultIsVisible={false} >
         <Inspector theme={THEME} invertTheme={false} />
         <SliderMonitor theme={THEME} />
     </DockMonitor>
