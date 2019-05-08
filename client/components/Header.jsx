@@ -7,15 +7,19 @@ import {getCurrentCourse} from '../selectors'
 export function Header({currentCourse}) {
     let subtitle = null
     if (currentCourse.learning) {
-        subtitle = <div className="subtitle">{currentCourse.learning}</div>
+        subtitle = (
+            <Link className="subtitle" routeName="select">
+                {currentCourse.learning}
+            </Link>
+        )
     }
 
     return (
         <header>
-            <Link routeName="select">
-                <div className="title">LangQuiz</div>
-                {subtitle}
+            <Link className="title" routeName="landing">
+                LangQuiz
             </Link>
+            {subtitle}
         </header>
     )
 }

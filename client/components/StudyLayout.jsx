@@ -1,10 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router5'
 
 import {loadSkills, loadWords, setCurrentCourse} from '../actions'
 import {getRoute} from '../selectors'
 
+// TODO: this is not really layout any more
 export function StudyLayout({route, setCurrentCourse, loadSkills, loadWords, children}) {
     const {learning, from} = route.params
     // TODO: 404 for bad course
@@ -14,11 +14,6 @@ export function StudyLayout({route, setCurrentCourse, loadSkills, loadWords, chi
 
     return (
         <div>
-            <Link routeName="select">Change Language</Link>
-            <Link routeName="study.quiz" routeParams={route.params}>Quiz</Link>
-            <Link routeName="study.history" routeParams={route.params}>History</Link>
-            <Link routeName="study.words" routeParams={route.params}>Words</Link>
-            <br />
             {children}
         </div>
     )
