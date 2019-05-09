@@ -1,8 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import Header from './Header'
-import Nav from './Nav'
+import Layout from './Layout'
 import HistoryPage from './HistoryPage'
 import LandingPage from './LandingPage'
 import QuizPage from './QuizPage'
@@ -38,11 +37,9 @@ function getPage(route) {
 
 export function App({route}) {
     return (
-        <div>
-            <Header />
-            <Nav />
-            <main>{getPage(route)}</main>
-        </div>
+        <Layout>
+            {getPage(route)}
+        </Layout>
     )
 }
 
