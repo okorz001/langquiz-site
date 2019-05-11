@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router5'
+import {compose} from 'redux'
 import AppBar from '@material-ui/core/AppBar'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Divider from '@material-ui/core/Divider'
@@ -20,6 +21,7 @@ import ListIcon from '@material-ui/icons/ListOutlined'
 import MenuIcon from '@material-ui/icons/MenuOutlined'
 import SettingsIcon from '@material-ui/icons/SettingsOutlined'
 
+import ListItemLink from './ListItemLink'
 import {getCurrentCourse} from '../selectors'
 
 const DRAWER_WIDTH = 240
@@ -73,7 +75,7 @@ export class Layout extends React.Component {
     }
 
     render() {
-        const {classes, theme} = this.props
+        const {classes, theme, currentCourse} = this.props
         const {showMenu} = this.state
 
         const header = (
@@ -93,28 +95,34 @@ export class Layout extends React.Component {
              </AppBar>
         )
 
+        const {learning, from} = currentCourse
+        const linkParams = {
+            disabled: !learning || !from,
+            routeParams: {learning, from},
+        }
+
         const drawer = (
           <div>
             <div className={classes.toolbar} />
             <Divider />
             <List>
-              <ListItem button>
+              <ListItemLink button routeName="study.quiz" {...linkParams}>
                 <ListItemIcon><AssignmentIcon /></ListItemIcon>
                 <ListItemText primary="Quiz" />
-              </ListItem>
-              <ListItem button>
+              </ListItemLink>
+              <ListItemLink button routeName="study.history" {...linkParams}>
                 <ListItemIcon><HistoryIcon /></ListItemIcon>
                 <ListItemText primary="History" />
-              </ListItem>
-              <ListItem button>
+              </ListItemLink>
+              <ListItemLink button routeName="study.words" {...linkParams}>
                 <ListItemIcon><ListIcon /></ListItemIcon>
                 <ListItemText primary="Words" />
-              </ListItem>
+              </ListItemLink>
               <Divider />
-              <ListItem button>
+              <ListItemLink button routeName="select">
                 <ListItemIcon><SettingsIcon /></ListItemIcon>
                 <ListItemText primary="Settings" />
-              </ListItem>
+              </ListItemLink>
             </List>
           </div>
         )
@@ -158,4 +166,11 @@ export class Layout extends React.Component {
     }
 }
 
-export default withStyles(styles, {withTheme: true})(Layout)
+export default compose(
+    connect(
+        state => ({
+            currentCourse: getCurrentCourse(state),
+        })
+    ),
+    withStyles(styles, {withTheme: true})
+)(Layout)
