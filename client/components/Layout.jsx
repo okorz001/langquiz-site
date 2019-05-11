@@ -89,7 +89,7 @@ export class Layout extends React.Component {
                     </IconButton>
                     <Typography variant="h6"
                                 color="inherit">
-                        LangQuiz
+                        TODO: Page Title
                     </Typography>
                  </Toolbar>
              </AppBar>
@@ -103,23 +103,45 @@ export class Layout extends React.Component {
 
         const drawer = (
           <div>
-            <div className={classes.toolbar} />
+            <AppBar position="relative">
+              <Toolbar>
+                    <IconButton className={classes.menuButton}
+                                color="inherit"
+                                onClick={this.toggleMenu}
+                                aria-label="Menu">
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant="h6"
+                                color="inherit">
+                        LangQuiz
+                    </Typography>
+              </Toolbar>
+            </AppBar>
             <Divider />
             <List>
-              <ListItemLink button routeName="study.quiz" {...linkParams}>
+              <ListItemLink button
+                            onClick={this.toggleMenu}
+                            routeName="study.quiz"
+                            {...linkParams} >
                 <ListItemIcon><AssignmentIcon /></ListItemIcon>
                 <ListItemText primary="Quiz" />
               </ListItemLink>
-              <ListItemLink button routeName="study.history" {...linkParams}>
+              <ListItemLink button
+                            onClick={this.toggleMenu}
+                            routeName="study.history"
+                            {...linkParams} >
                 <ListItemIcon><HistoryIcon /></ListItemIcon>
                 <ListItemText primary="History" />
               </ListItemLink>
-              <ListItemLink button routeName="study.words" {...linkParams}>
+              <ListItemLink button
+                            onClick={this.toggleMenu}
+                            routeName="study.words"
+                            {...linkParams} >
                 <ListItemIcon><ListIcon /></ListItemIcon>
                 <ListItemText primary="Words" />
               </ListItemLink>
               <Divider />
-              <ListItemLink button routeName="select">
+              <ListItemLink button onClick={this.toggleMenu} routeName="select">
                 <ListItemIcon><SettingsIcon /></ListItemIcon>
                 <ListItemText primary="Settings" />
               </ListItemLink>
