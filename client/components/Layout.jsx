@@ -66,11 +66,12 @@ export class Layout extends React.Component {
             showMenu: false,
         }
 
-        this.toggleMenu = () => {
-            console.log('toggleMenu')
-            this.setState(state => ({
-                showMenu: !state.showMenu,
-            }))
+        this.showMenu = () => {
+            this.setState({showMenu: true})
+        }
+
+        this.hideMenu = () => {
+            this.setState({showMenu: false})
         }
     }
 
@@ -83,7 +84,7 @@ export class Layout extends React.Component {
                 <Toolbar>
                     <IconButton className={classes.menuButton}
                                 color="inherit"
-                                onClick={this.toggleMenu}
+                                onClick={this.showMenu}
                                 aria-label="Menu">
                         <MenuIcon />
                     </IconButton>
@@ -107,7 +108,7 @@ export class Layout extends React.Component {
               <Toolbar>
                     <IconButton className={classes.menuButton}
                                 color="inherit"
-                                onClick={this.toggleMenu}
+                                onClick={this.hideMenu}
                                 aria-label="Menu">
                         <MenuIcon />
                     </IconButton>
@@ -120,28 +121,28 @@ export class Layout extends React.Component {
             <Divider />
             <List>
               <ListItemLink button
-                            onClick={this.toggleMenu}
+                            onClick={this.hideMenu}
                             routeName="study.quiz"
                             {...linkParams} >
                 <ListItemIcon><AssignmentIcon /></ListItemIcon>
                 <ListItemText primary="Quiz" />
               </ListItemLink>
               <ListItemLink button
-                            onClick={this.toggleMenu}
+                            onClick={this.hideMenu}
                             routeName="study.history"
                             {...linkParams} >
                 <ListItemIcon><HistoryIcon /></ListItemIcon>
                 <ListItemText primary="History" />
               </ListItemLink>
               <ListItemLink button
-                            onClick={this.toggleMenu}
+                            onClick={this.hideMenu}
                             routeName="study.words"
                             {...linkParams} >
                 <ListItemIcon><ListIcon /></ListItemIcon>
                 <ListItemText primary="Words" />
               </ListItemLink>
               <Divider />
-              <ListItemLink button onClick={this.toggleMenu} routeName="select">
+              <ListItemLink button onClick={this.hideMenu} routeName="select">
                 <ListItemIcon><SettingsIcon /></ListItemIcon>
                 <ListItemText primary="Settings" />
               </ListItemLink>
@@ -156,7 +157,7 @@ export class Layout extends React.Component {
                   variant="temporary"
                   anchor={theme.direction === 'rtl' ? 'right' : 'left'}
                   open={showMenu}
-                  onClose={this.toggleMenu}
+                  onClose={this.hideMenu}
                   classes={{paper: classes.drawerPaper}}
                 >
                   {drawer}
