@@ -17,6 +17,7 @@ import Typography from '@material-ui/core/Typography'
 import {withStyles} from '@material-ui/core/styles'
 import AssignmentIcon from '@material-ui/icons/AssignmentOutlined'
 import HistoryIcon from '@material-ui/icons/HistoryOutlined'
+import LanguageIcon from '@material-ui/icons/LanguageOutlined'
 import ListIcon from '@material-ui/icons/ListOutlined'
 import MenuIcon from '@material-ui/icons/MenuOutlined'
 import SettingsIcon from '@material-ui/icons/SettingsOutlined'
@@ -120,6 +121,11 @@ export class Layout extends React.Component {
             </AppBar>
             <Divider />
             <List>
+              <ListItemLink button onClick={this.hideMenu} routeName="select">
+                <ListItemIcon><LanguageIcon /></ListItemIcon>
+                <ListItemText primary="Change Language" secondary={learning} />
+              </ListItemLink>
+              <Divider />
               <ListItemLink button
                             onClick={this.hideMenu}
                             routeName="study.quiz"
@@ -142,7 +148,7 @@ export class Layout extends React.Component {
                 <ListItemText primary="Words" />
               </ListItemLink>
               <Divider />
-              <ListItemLink button onClick={this.hideMenu} routeName="select">
+              <ListItemLink button onClick={this.hideMenu} disabled>
                 <ListItemIcon><SettingsIcon /></ListItemIcon>
                 <ListItemText primary="Settings" />
               </ListItemLink>
