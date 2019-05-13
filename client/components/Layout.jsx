@@ -25,7 +25,7 @@ import SettingsIcon from '@material-ui/icons/SettingsOutlined'
 import ListItemLink from './ListItemLink'
 import {getCurrentCourse} from '../selectors'
 
-const DRAWER_WIDTH = 240
+const DRAWER_WIDTH = 242
 
 const styles = theme => ({
   root: {

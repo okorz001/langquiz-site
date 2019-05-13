@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 import Layout from './Layout'
+import Theme from './Theme'
 import HistoryPage from './HistoryPage'
 import LandingPage from './LandingPage'
 import QuizPage from './QuizPage'
@@ -37,9 +38,11 @@ function getPage(route) {
 
 export function App({route}) {
     return (
-        <Layout>
-            {getPage(route)}
-        </Layout>
+        <Theme>
+            <Layout>
+                {getPage(route)}
+            </Layout>
+        </Theme>
     )
 }
 
