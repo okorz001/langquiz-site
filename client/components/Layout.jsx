@@ -9,7 +9,6 @@ import Drawer from '@material-ui/core/Drawer'
 import Hidden from '@material-ui/core/Hidden'
 import IconButton from '@material-ui/core/IconButton'
 import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -30,6 +29,7 @@ const DRAWER_WIDTH = 242
 const styles = theme => ({
   root: {
     display: 'flex',
+    height: '100%',
   },
   drawer: {
     [theme.breakpoints.up('sm')]: {
@@ -56,6 +56,8 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
+    display: 'flex',
+    flexFlow: 'column nowrap',
   },
 })
 

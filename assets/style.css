@@ -1,39 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans');
-/*
-@import url('https://meyerweb.com/eric/tools/css/reset/reset.css');
 
-body {
-    font-family: "Noto Sans", sans-serif;
+html,
+body,
+#app {
+    height: 100%;
+    width 100%;
 }
-
-a {
-    color: currentColor;
-    text-decoration: none;
-}
-
-header {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-    color: white;
-}
-
-header .title {
-    font-size: 1.25em;
-}
-
-header .subtitle {
-    font-size: 1.0em;
-}
-
-nav {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-around;
-    align-items: center;
-    background-color: black;
-    color: white;
-}
-*/
