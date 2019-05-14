@@ -2,16 +2,17 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Typography from '@material-ui/core/Typography'
 
-import StudyLayout from './StudyLayout'
+import RequireCourse from './RequireCourse'
 import {getCurrentCourseWords} from '../selectors'
 
 export function WordsPage({words}) {
     return (
-        <StudyLayout>
+        <React.Fragment>
+            <RequireCourse />
             <Typography paragraph>
-                <div>Found {words.length} words.</div>
+                Found {words.length} words.
             </Typography>
-        </StudyLayout>
+        </React.Fragment>
     )
 }
 

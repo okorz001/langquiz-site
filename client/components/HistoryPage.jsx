@@ -2,15 +2,16 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Typography from '@material-ui/core/Typography'
 
-import StudyLayout from './StudyLayout'
+import RequireCourse from './RequireCourse'
 
 export function RecentPage() {
     return (
-        <StudyLayout>
+        <React.Fragment>
+            <RequireCourse />
             <Typography paragraph>
-                <div>Recent</div>
+                Recent
             </Typography>
-        </StudyLayout>
+        </React.Fragment>
     )
 }
 

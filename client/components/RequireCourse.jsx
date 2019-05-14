@@ -4,29 +4,22 @@ import {connect} from 'react-redux'
 import {loadSkills, loadWords, setCurrentCourse} from '../actions'
 import {getRoute} from '../selectors'
 
-// TODO: this is not really layout any more
-export function StudyLayout({route, setCurrentCourse, loadSkills, loadWords, children}) {
+export function RequireCourse({route, setCurrentCourse, loadSkills, loadWords}) {
     const {learning, from} = route.params
     // TODO: 404 for bad course
     setCurrentCourse(learning, from)
     loadSkills(learning, from)
     loadWords(learning, from)
-
-    return (
-        <div>
-            {children}
-        </div>
-    )
+    return null
 }
 
 export default connect(
-    (state, ownProps) => ({
+    state => ({
         route: getRoute(state),
-        children: ownProps.children,
     }),
     {
         loadSkills,
         loadWords,
         setCurrentCourse,
     }
-)(StudyLayout)
+)(RequireCourse)
