@@ -8,7 +8,7 @@
     "clean": "rimraf build",
     "build": "parcel build client/index.jsx -d build -o bundle.js",
     "dev": "npm-run-all --parallel dev:*",
-    "dev:client": "parcel watch client/index.jsx -d build -o bundle.js",
+    "dev:client": "parcel watch client/index.jsx -d build -o bundle.js --no-autoinstall",
     "dev:server": "nodemon --watch server server/index.js",
     "start": "node server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
