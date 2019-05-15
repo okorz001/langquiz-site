@@ -6,7 +6,6 @@ import Paper from '@material-ui/core/Paper'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
-import TableFooter from '@material-ui/core/TableFooter'
 import TableHead from '@material-ui/core/TableHead'
 import TablePagination from '@material-ui/core/TablePagination'
 import TableRow from '@material-ui/core/TableRow'
@@ -110,20 +109,17 @@ export class WordsPage extends React.Component {
         const rows = selectedWords
             .slice((page) * rowsPerPage, (page + 1) * rowsPerPage)
             .map(word => {
-                const translations = word.translations.map(it => (
-                    <TableCell key={it}>{it}</TableCell>
-                ))
-                return (
-                    <React.Fragment>
-                        <TableRow key={word.word}>
-                            <TableCell rowSpan={word.translations.length}>
-                                {word.word}
-                            </TableCell>
-                            {translations[0]}
-                        </TableRow>
-                        {translations.slice(1).map(it => <TableRow>{it}</TableRow>)}
-                    </React.Fragment>
+                const wordCell = (
+                    <TableCell rowSpan={word.translations.length}>
+                        {word.word}
+                    </TableCell>
                 )
+                return word.translations.map((translation, i) => (
+                    <TableRow key={word.word + i}>
+                        {i == 0 ? wordCell : null}
+                        <TableCell>{translation}</TableCell>
+                    </TableRow>
+                ))
             })
 
         return (
@@ -151,15 +147,13 @@ export class WordsPage extends React.Component {
                         <TableBody>
                             {rows}
                         </TableBody>
-                        <TableFooter>
-                            <TablePagination count={selectedWords.length}
-                                             page={page}
-                                             onChangePage={this.setPage}
-                                             rowsPerPage={rowsPerPage}
-                                             onChangeRowsPerPage={this.setRowsPerPage}
-                                             />
-                        </TableFooter>
                     </Table>
+                    <TablePagination component="div"
+                                     count={selectedWords.length}
+                                     page={page}
+                                     onChangePage={this.setPage}
+                                     rowsPerPage={rowsPerPage}
+                                     onChangeRowsPerPage={this.setRowsPerPage} />
                 </Paper>
             </div>
         )
