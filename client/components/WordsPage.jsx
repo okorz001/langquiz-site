@@ -15,6 +15,7 @@ import SearchIcon from '@material-ui/icons/SearchOutlined'
 
 import RequireCourse from './RequireCourse'
 import {getCurrentCourseWords} from '../selectors'
+import {fuzzySearch} from '../utils'
 
 const styles = theme => ({
     root: {
@@ -96,15 +97,10 @@ export class WordsPage extends React.Component {
         const selectedWords = words
             // TODO: some words have zero translations?!
             .filter(word => word.translations.length)
-            .filter(word => {
-                if (!search) {
-                    return true
-                }
-                return !search ||
-                    // TODO: locale-safe and caps insensitive
-                    word.word.search(search) != -1 ||
-                    word.translations.some(it => it.search(search) != -1)
-            })
+            .filter(word =>
+                fuzzySearch(search, word.word) ||
+                word.translations.some(it => fuzzySearch(search, it))
+            )
 
         const rows = selectedWords
             .slice((page) * rowsPerPage, (page + 1) * rowsPerPage)
