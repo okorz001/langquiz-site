@@ -7,6 +7,7 @@ const ROUTES = [
     {name: 'study', path: '/study/:learning/:from', children: [
             {name: 'quiz', path: '/quiz'},
             {name: 'history', path: '/history'},
+            {name: 'skills', path: '/skills'},
             {name: 'words', path: '/words'},
         ],
     },

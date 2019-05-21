@@ -7,6 +7,7 @@ import HistoryPage from './HistoryPage'
 import LandingPage from './LandingPage'
 import QuizPage from './QuizPage'
 import SelectPage from './SelectPage'
+import SkillsPage from './SkillsPage'
 import WordsPage from './WordsPage'
 import {getRoute} from '../selectors'
 
@@ -26,6 +27,9 @@ function getPage(route) {
     }
     else if (route.name == 'study.history') {
         return <HistoryPage />
+    }
+    else if (route.name == 'study.skills') {
+        return <SkillsPage />
     }
     else if (route.name == 'study.words') {
         return <WordsPage />

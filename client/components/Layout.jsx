@@ -144,6 +144,13 @@ export class Layout extends React.Component {
               </ListItemLink>
               <ListItemLink button
                             onClick={this.hideMenu}
+                            routeName="study.skills"
+                            {...linkParams} >
+                <ListItemIcon><ListIcon /></ListItemIcon>
+                <ListItemText primary="Skills" />
+              </ListItemLink>
+              <ListItemLink button
+                            onClick={this.hideMenu}
                             routeName="study.words"
                             {...linkParams} >
                 <ListItemIcon><ListIcon /></ListItemIcon>
